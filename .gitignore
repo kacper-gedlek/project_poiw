@@ -1,3 +1,10 @@
+# Ignore Eclipse Gradle plugin generated files
+.project
+.settings
+.classpath
+bin
+
+# Ignore Zed editor boilerplate
 .zed
 
 # Ignore Gradle project-specific cache directory
