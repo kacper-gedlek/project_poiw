@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+    <title>Card Authentication System</title>
+    <meta name="color-scheme" content="light">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+    <main class="container">
+        <h1>Card Authentication System</h1>
+
+        <h2>Add New Card</h2>
+        <form th:action="@{/cards/add}" th:object="${newCard}" method="post">
+            <div class="grid">
+                <label for="cardNumber">
+                    Card Number
+                    <input type="text" th:field="*{cardNumber}" id="cardNumber" required />
+                    <span th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></span>
+                </label>
+                <label for="accessLevel">
+                    Access Level (0-5)
+                    <input type="number" th:field="*{accessLevel}" id="accessLevel" min="0" max="5" required />
+                    <span th:if="${#fields.hasErrors('accessLevel')}" th:errors="*{accessLevel}"></span>
+                </label>
+            </div>
+            <div class="grid">
+                <label for="name">
+                    Name
+                    <input type="text" th:field="*{name}" id="name" />
+                </label>
+                <label for="surname">
+                    Surname
+                    <input type="text" th:field="*{surname}" id="surname" />
+                </label>
+            </div>
+            <button type="submit">Add Card</button>
+        </form>
+
+        <h2>Existing Cards</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Card Number</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Access Level</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="card : ${cards}">
+                    <td th:text="${card.id}"></td>
+                    <td th:text="${card.cardNumber}"></td>
+                    <td th:text="${card.name}"></td>
+                    <td th:text="${card.surname}"></td>
+                    <td th:text="${card.accessLevel}"></td>
+                    <td th:text="${card.status}"></td>
+                    <td>
+                        <fieldset role="group">
+                            <form th:action="@{/cards/toggle/{id}(id=${card.id})}" method="post">
+                                <button type="submit" class="outline" th:text="${card.status == 'ACTIVE' ? 'Deactivate' : 'Activate'}"></button>
+                            </form>
+                            <form th:action="@{/cards/delete/{id}(id=${card.id})}" method="post">
+                                <button type="submit" class="outline secondary" onclick="return confirm('Are you sure you want to delete this card?');">Remove</button>
+                            </form>
+                        </fieldset>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

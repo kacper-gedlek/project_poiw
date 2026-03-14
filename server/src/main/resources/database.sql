@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS cards (
     card_number VARCHAR(16) NOT NULL UNIQUE,
     name VARCHAR(100),
     surname VARCHAR(100),
-    access_level INT DEFAULT 1,
-    status VARCHAR(20) DEFAULT 'ACTIVE',
+    access_level INT DEFAULT 0,
+    status VARCHAR(20) DEFAULT 'ACTIVE'
 );
