@@ -11,7 +11,7 @@ public class CasServerApplication {
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/cards";
+        return "index";
     }
 
     public static void main(String[] args) {

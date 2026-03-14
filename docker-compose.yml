@@ -1,11 +1,12 @@
 name: CAS
+
 services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_DB: cas_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: cas_db
     ports:
       - "5432:5432"
     healthcheck:
@@ -14,15 +15,14 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
+  server:
     image: cas-server:0.0.1
-    depends_on:
-      db:
-        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cas_db
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      db:
+        condition: service_healthy
