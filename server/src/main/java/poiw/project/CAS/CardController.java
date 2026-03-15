@@ -43,19 +43,6 @@ public class CardController {
         return "redirect:/cards";
     }
 
-    @PostMapping("/toggle/{id}")
-    public String toggleStatus(@PathVariable Long id) {
-        cardRepository.findById(id).ifPresent(card -> {
-            if ("ACTIVE".equals(card.getStatus())) {
-                card.setStatus("INACTIVE");
-            } else {
-                card.setStatus("ACTIVE");
-            }
-            cardRepository.save(card);
-        });
-        return "redirect:/cards";
-    }
-
     @PostMapping("/delete/{id}")
     public String deleteCard(@PathVariable Long id) {
         cardRepository.deleteById(id);

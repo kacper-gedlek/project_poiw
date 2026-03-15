@@ -14,7 +14,6 @@
                 </header></li>
             </ul>
             <ul>
-                <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/cards}">Cards</a></li>
                 <li><a th:href="@{/readers}">Readers</a></li>
             </ul>
@@ -26,7 +25,7 @@
             <div class="grid">
                 <label for="cardNumber">
                     Card Number
-                    <input type="text" th:field="*{cardNumber}" id="cardNumber" required />
+                    <input type="text" th:field="*{cardNumber}" id="cardNumber" minlength="16" maxlength="16" required />
                     <span th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></span>
                 </label>
                 <label for="accessLevel">
@@ -34,15 +33,9 @@
                     <input type="number" th:field="*{accessLevel}" id="accessLevel" min="0" max="5" required />
                     <span th:if="${#fields.hasErrors('accessLevel')}" th:errors="*{accessLevel}"></span>
                 </label>
-            </div>
-            <div class="grid">
-                <label for="name">
-                    Name
-                    <input type="text" th:field="*{name}" id="name" />
-                </label>
-                <label for="surname">
-                    Surname
-                    <input type="text" th:field="*{surname}" id="surname" />
+                <label for="cardOwner">
+                    Card Owner
+                    <input type="text" th:field="*{cardOwner}" id="cardOwner" />
                 </label>
             </div>
             <button type="submit">Add Card</button>
@@ -55,10 +48,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Card Number</th>
-                    <th>Name</th>
-                    <th>Surname</th>
+                    <th>Card Owner</th>
                     <th>Access Level</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -66,15 +57,10 @@
                 <tr th:each="card : ${cards}">
                     <td th:text="${card.id}"></td>
                     <td th:text="${card.cardNumber}"></td>
-                    <td th:text="${card.name}"></td>
-                    <td th:text="${card.surname}"></td>
+                    <td th:text="${card.cardOwner}"></td>
                     <td th:text="${card.accessLevel}"></td>
-                    <td th:text="${card.status}"></td>
                     <td>
                         <fieldset role="group">
-                            <form th:action="@{/cards/toggle/{id}(id=${card.id})}" method="post">
-                                <button type="submit" th:text="${card.status == 'ACTIVE' ? 'Deactivate' : 'Activate'}"></button>
-                            </form>
                             <form th:action="@{/cards/delete/{id}(id=${card.id})}" method="post">
                                 <button type="submit" onclick="return confirm('Are you sure you want to delete this card?');">Remove</button>
                             </form>

@@ -14,7 +14,6 @@
                 </header></li>
             </ul>
             <ul>
-                <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/cards}">Cards</a></li>
                 <li><a th:href="@{/readers}">Readers</a></li>
             </ul>
@@ -26,13 +25,17 @@
             <div class="grid">
                 <label for="readerNumber">
                     Reader Number
-                    <input type="text" th:field="*{readerNumber}" id="readerNumber" required />
+                    <input type="text" th:field="*{readerNumber}" id="readerNumber" minlength="16" maxlength="16" required />
                     <span th:if="${#fields.hasErrors('readerNumber')}" th:errors="*{readerNumber}"></span>
                 </label>
                 <label for="requiredAccessLevel">
                     Required Access Level (0-5)
                     <input type="number" th:field="*{requiredAccessLevel}" id="requiredAccessLevel" min="0" max="5" required />
                     <span th:if="${#fields.hasErrors('requiredAccessLevel')}" th:errors="*{requiredAccessLevel}"></span>
+                </label>
+                <label for="readerName">
+                    Reader Name
+                    <input type="text" th:field="*{readerName}" id="readerName" />
                 </label>
             </div>
             <button type="submit">Add Reader</button>
@@ -45,6 +48,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Reader Number</th>
+                    <th>Reader Name</th>
                     <th>Required Access Level</th>
                     <th>Action</th>
                 </tr>
@@ -53,6 +57,7 @@
                 <tr th:each="reader : ${readers}">
                     <td th:text="${reader.id}"></td>
                     <td th:text="${reader.readerNumber}"></td>
+                    <td th:text="${reader.readerName}"></td>
                     <td th:text="${reader.requiredAccessLevel}"></td>
                     <td>
                         <form th:action="@{/readers/delete/{id}(id=${reader.id})}" method="post">
