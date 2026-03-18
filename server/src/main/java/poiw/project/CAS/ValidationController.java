@@ -2,7 +2,7 @@ package poiw.project.CAS;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +19,7 @@ public class ValidationController {
         this.readerRepository = readerRepository;
     }
 
-    @PostMapping(value = "/validation", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/validation", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ValidationResponse> validateAccess(@RequestBody ValidationRequest request) {
         Optional<Reader> readerOpt = readerRepository.findByReaderNumber(request.getReaderNumber());
         Optional<Card> cardOpt = cardRepository.findByCardNumber(request.getCardNumber());
