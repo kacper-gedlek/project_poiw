@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
 @Controller
-public class CasServerApplication {
+public class CasApplication {
 
     @GetMapping("/")
     public String index() {
@@ -15,6 +15,6 @@ public class CasServerApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(CasServerApplication.class, args);
+        SpringApplication.run(CasApplication.class, args);
     }
 }

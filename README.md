@@ -1,9 +1,11 @@
 # Card Authentication System (CAS)
 
-### Build And Run
+## serverCAS
+
+### Build and Run
 
 ```bash
-./gradlew server:bootBuildImage
+./gradlew serverCAS:bootBuildImage
 docker compose up
 ```
 

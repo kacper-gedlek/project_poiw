@@ -6,7 +6,7 @@ plugins {
 
 group = 'poiw.project'
 version = '0.0.1'
-description = 'CAS - Card Authentication System'
+description = 'Card Authentication System (CAS) API'
 
 java {
 	toolchain {
