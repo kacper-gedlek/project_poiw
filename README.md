@@ -2,20 +2,20 @@
 
 ## serverCAS
 
-### Build and Run
+#### Build and Run
 
 ```bash
 ./gradlew serverCAS:bootBuildImage
 docker compose up
 ```
 
-### Endpoints
+#### Endpoints
 - Card and Reader managment UI: `http://{confiugred_url}/`
 - Validation API: `http://{confiugred_url}/validation`
 
-### API Documentation
+#### API
 
-#### Request Example
+###### Request Example
 
 `GET` `http://localhost:8080/validation`
 
@@ -26,7 +26,7 @@ docker compose up
 }
 ```
 
-#### Response Example
+###### Response Example
 
 ```json
 {
@@ -36,7 +36,11 @@ docker compose up
 }
 ```
 
-##### Possible values for `validation`:
+###### Possible values for `validation`:
 - `ACCESS_GRANTED`
 - `ACCESS_DENIED`
 - `ERROR` - if cardNumber or readerNumber is found not in the database
+
+## readerUtils
+
+#### TODO
