@@ -29,5 +29,5 @@ task runDemo(type: JavaExec) {
     group = "Execution"
     description = "Runs the demo class"
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'poiw.project.CAS.demo' // Replace with your class path
+    mainClass = 'poiw.project.CAS.demo' 
 }
