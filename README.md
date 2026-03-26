@@ -46,6 +46,14 @@ docker compose up
 Provides a wrapper around the Java Smart Card I/O API for getting UID
 of contactless cards
 
+#### demo
+```bash
+./gradlew runDemo
+```
+
+Lists avaliable terminals and displays UID of MiFare card inseted to the first connected terminal 
+
+
 #### Example usage
 ```java
 Reader reader = new Reader();
@@ -59,3 +67,10 @@ reader.setReader(0);
 String cardUID = reader.getUID();
 System.out.println("Card UID: " + cardUID);
 ```
+
+#### JavaDoc
+```bash
+./gradlew readerUtils:javadoc
+```
+
+Documentation of `Reader` class in HTML format is generated in `build/docs/javadoc/index.html`
