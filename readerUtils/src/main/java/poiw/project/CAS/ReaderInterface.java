@@ -11,14 +11,14 @@ public interface ReaderInterface {
 
 	/**
 	 * Returns a list of available card terminals
-	 * @return List<CardTerminal>, when no readers are detected an empty list
+	 * @return list of avaliable terminals, when no readers are detected an empty list
 	 * is returned
 	 */
 	List<CardTerminal> getReaders();
 
 	/**
 	 * Selects a specific reader by its index in the list obtained by calling getReaders()
-	 * @param index 
+	 * @param index of terminal returned by getReaders()
 	 */
 	void setReader(int index);
 
