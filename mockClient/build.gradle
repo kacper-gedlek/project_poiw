@@ -1,0 +1,32 @@
+plugins {
+	id 'java'
+	id 'application'
+}
+
+group = 'poiw.project'
+version = '0.0.1'
+description = 'Desktop application for testing both serverCAS API and readerUtil library'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+application {
+	mainClass = 'poiw.project.CAS.MockClient'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation project(':readerUtils')
+	testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
