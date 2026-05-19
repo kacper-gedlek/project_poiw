@@ -5,7 +5,7 @@ plugins {
 
 group = 'poiw.project'
 version = '0.0.1'
-description = 'Desktop application for testing both serverCAS API and readerUtil library'
+description = 'Aplikacja do testowania serwera CAS oraz biblioteki readerUtil'
 
 java {
 	toolchain {
@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
 	implementation project(':readerUtils')
+	implementation 'com.google.code.gson:gson:2.13.1'
 	testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
