@@ -19,15 +19,23 @@ repositories {
 dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.bouncycastle:bcpkix-jdk18on:1.78.1'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task runDemo(type: JavaExec) {
+task runDemoUID(type: JavaExec) {
     group = "Execution"
-    description = "Runs the demo class"
+    description = "Runs the UID demo class"
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'poiw.project.CAS.demo' 
+    mainClass = 'poiw.project.CAS.demoUID'
+}
+
+task runDemoELS(type: JavaExec) {
+    group = "Execution"
+    description = "Runs the ELS demo class"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'poiw.project.CAS.demoELS'
 }
