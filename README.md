@@ -68,6 +68,18 @@ String cardUID = reader.getUID();
 System.out.println("Card UID: " + cardUID);
 ```
 
+#### Reading data from electronic student ID cards (ELS)
+To ensure quick onboarding of new users, readerUtils provides an API for reading the user's name, surname, and student ID from an ELS card.
+It is used by invoking `getElsData()` on the `reader` object, which returns an `elsData` object:
+
+```java
+public class elsData {
+	private String name;
+	private String surname;
+	private  String albumNumber;
+}
+```
+
 #### JavaDoc
 ```bash
 ./gradlew readerUtils:javadoc
