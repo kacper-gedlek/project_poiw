@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-theme="light">
+<head>
+    <title>CAS Mock Client</title>
+    <meta name="color-scheme" content="light">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main class="container">
+    <nav>
+        <ul>
+            <li>
+                <header>
+                    <h1>Card Authentication System (CAS)</h1>
+                </header>
+            </li>
+        </ul>
+        <ul>
+            <li><a th:href="@{/cards}">Cards</a></li>
+            <li><a th:href="@{/readers}">Readers</a></li>
+            <li><a th:href="@{/mock-client}">Mock Client</a></li>
+        </ul>
+    </nav>
+
+    <h2>Mock RFID Client</h2>
+
+    <article th:if="${message}">
+        <strong th:text="${message}"></strong>
+    </article>
+
+    <section class="grid">
+        <article>
+            <h3>Server status</h3>
+            <p>CAS server is running.</p>
+            <p>
+                Cards in database: <strong th:text="${cardsCount}"></strong><br>
+                Readers in database: <strong th:text="${readersCount}"></strong><br>
+                Requests made: <strong th:text="${requestCount}"></strong>
+            </p>
+        </article>
+
+        <article>
+            <h3>RFID Reader</h3>
+            <p th:if="${initializedReaderNumber}">
+                Initialized reader:<br>
+                <strong th:text="${initializedReaderNumber}"></strong><br>
+                <span th:text="${initializedReaderName}"></span>
+            </p>
+            <p th:unless="${initializedReaderNumber}">
+                Reader is not initialized.
+            </p>
+        </article>
+    </section>
+
+    <form method="post" th:object="${validationRequest}">
+        <h3>Simulation</h3>
+
+        <div class="grid">
+            <label for="readerNumber">
+                Reader Number
+                <input type="text"
+                       id="readerNumber"
+                       th:field="*{readerNumber}"
+                       minlength="16"
+                       maxlength="16"
+                       placeholder="Example: 1111222233334444" />
+            </label>
+
+            <label for="cardNumber">
+                Card Number
+                <input type="text"
+                       id="cardNumber"
+                       th:field="*{cardNumber}"
+                       minlength="16"
+                       maxlength="16"
+                       placeholder="Example: 5555666677778888" />
+            </label>
+        </div>
+
+        <fieldset role="group">
+            <button type="submit" th:formaction="@{/mock-client/initialize-reader}">
+                Initialize Reader
+            </button>
+
+            <button type="submit" th:formaction="@{/mock-client/random-reader}">
+                Random Reader
+            </button>
+
+            <button type="submit" th:formaction="@{/mock-client/random-card}">
+                Random Card
+            </button>
+
+            <button type="submit" th:formaction="@{/mock-client/validate}">
+                Scan / Validate
+            </button>
+        </fieldset>
+    </form>
+
+    <form method="post" th:action="@{/mock-client/reset}">
+        <button type="submit" class="secondary">Reset Mock Client</button>
+    </form>
+
+    <section th:if="${response}">
+        <h3>Validation Result</h3>
+
+        <article>
+            <h4 th:text="${response.validation}"></h4>
+
+            <p>
+                Card owner:
+                <strong th:text="${response.cardOwner != null ? response.cardOwner : 'unknown'}"></strong>
+            </p>
+
+            <p>
+                Reader name:
+                <strong th:text="${response.readerName != null ? response.readerName : 'unknown'}"></strong>
+            </p>
+
+            <p>
+                Response time:
+                <strong th:text="${responseTime + ' ms'}"></strong>
+            </p>
+        </article>
+
+        <div class="grid">
+            <article>
+                <h4>HTTP Request</h4>
+                <p><strong>GET</strong> /validation</p>
+                <pre th:text="${requestJson}"></pre>
+            </article>
+
+            <article>
+                <h4>HTTP Response</h4>
+                <p><strong>200 OK</strong></p>
+                <pre th:text="${responseJson}"></pre>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

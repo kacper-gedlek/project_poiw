@@ -14,4 +14,10 @@ public class elsData {
 	public String getName() { return name; }
 	public String getSurname() { return surname; }
 	public String getAlbumNumber() { return albumNumber; }
+
+	@Override
+    public String toString() {
+		return "elsData{" + "name=" + name + ", surname=" + surname + ", albumNumber=" + albumNumber + "}";
+	}
+	
 }
