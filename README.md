@@ -86,3 +86,48 @@ public class elsData {
 ```
 
 Documentation of `Reader` class in HTML format is generated in `build/docs/javadoc/index.html`
+
+## mockClient
+
+An application for testing the CAS server and the `readerUtils` library. It provides a simulation of an RFID reader and full visibility of HTTP communication. It contains an interactive CLI tool for debugging and verification.
+
+#### Run CLI
+
+To run the interactive CLI tool:
+```bash
+./gradlew mockClient:run
+```
+
+The CLI menu provides options to:
+- Perform a Server Health Check (checks connection and status of the CAS server).
+- Initialize the simulated RFID Reader (manual ID or random ID).
+- Scan a specific or random card and perform validation against the server.
+- Show the total number of validation requests made.
+
+#### Example programmatic usage
+
+You can also use the `MockClient` class programmatically to simulate and test card scans:
+
+```java
+// Initialize MockClient (default server URL: http://localhost:8080)
+MockClient client = new MockClient();
+
+// Or specify a custom server URL
+MockClient customClient = new MockClient("http://localhost:9090");
+
+// Initialize the simulated reader
+client.getRfidSimulator().initialize("1111222233334444", "Main Gate Reader");
+
+// Simulate scanning a card and sending a validation request to the server
+CommunicationLog log = client.simulateScanAndValidate("5555666677778888");
+
+// Print complete HTTP communication logs (request and response details)
+System.out.println(log.toDebugString());
+
+// Parse and inspect the validation result
+ValidationResult result = client.getValidationService().parseResult(log);
+if (result != null) {
+    System.out.println("Access validation: " + result.getValidation()); // e.g. ACCESS_GRANTED
+    System.out.println("Card Owner: " + result.getCardOwner());
+}
+```

@@ -1,6 +1,6 @@
 package poiw.project.CAS;
 
-public class demoUID {
+public class demo {
 	public static void main(String[] args) {
 		Reader reader = new Reader();
 		reader.initialize();
